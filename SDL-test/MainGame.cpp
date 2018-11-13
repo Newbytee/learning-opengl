@@ -2,11 +2,14 @@
 #include "MainGame.h"
 #include "Errors.h"
 
-MainGame::MainGame() {
-	_window = nullptr;
-	_screenWidth = 1024;
-	_screenHeight = 768;
-	_gameState = GameState::PLAY;
+MainGame::MainGame() :
+	_window(nullptr), 
+	_screenWidth(1024),
+	_screenHeight(768), 
+	_gameState(GameState::PLAY), 
+	_time(0) 
+{
+
 }
 
 MainGame::~MainGame() {
@@ -56,6 +59,7 @@ void MainGame::initShaders() {
 void MainGame::gameLoop() {
 	while (_gameState != GameState::EXIT) {
 		processInput();
+		_time += 0.01;
 		drawGame();
 	}
 }
@@ -79,6 +83,10 @@ void MainGame::drawGame() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	_colourProgram.use();
+
+	GLuint timeLocation = _colourProgram.getUniformLocation("time");
+
+	glUniform1f(timeLocation, _time);
 
 	_sprite.draw();
 
