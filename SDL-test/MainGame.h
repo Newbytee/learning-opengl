@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "Sprite.h"
 #include "GLSLProgram.h"
+#include "GLTexture.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -26,6 +27,7 @@ private:
 
 	Sprite _sprite;
 	GLSLProgram _colourProgram;
+	GLTexture _playerTexture;
 
 	float _time;
 };
