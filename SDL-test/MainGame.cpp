@@ -1,7 +1,6 @@
 #include <iostream>
 #include "MainGame.h"
 #include "Errors.h"
-#include "ImageLoader.h"
 
 MainGame::MainGame() :
 	_window(nullptr), 
@@ -20,7 +19,7 @@ void MainGame::run() {
 	initSystems();
 	_sprite.init(-1.0f, -1.0f, 2.0f, 2.0f);
 
-	_playerTexture = ImageLoader::loadPNG("Textures/lowres.png");
+	// _playerTexture = ImageLoader::loadPNG("Textures/unnamed.png");
 
 	gameLoop();
 }
@@ -64,7 +63,7 @@ void MainGame::initShaders() {
 void MainGame::gameLoop() {
 	while (_gameState != GameState::EXIT) {
 		processInput();
-		_time += 0.01;
+		_time += 0.01f;
 		drawGame();
 	}
 }
@@ -93,8 +92,8 @@ void MainGame::drawGame() {
 	GLint textureLocation = _colourProgram.getUniformLocation("mySampler");
 	glUniform1i(textureLocation, 0);
 
-	// GLuint timeLocation = _colourProgram.getUniformLocation("time");
-	// glUniform1f(timeLocation, _time);
+	GLuint timeLocation = _colourProgram.getUniformLocation("time");
+	glUniform1f(timeLocation, _time);
 
 	_sprite.draw();
 

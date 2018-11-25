@@ -14,7 +14,7 @@ Sprite::~Sprite() {
 	}
 }
 
-void Sprite::init(float x, float y, float width, float height) {
+void Sprite::init(float x, float y, float width, float height, std::string texturePath) {
 	_x = x;
 	_y = y;
 	_width = width;
@@ -27,7 +27,7 @@ void Sprite::init(float x, float y, float width, float height) {
 	Vertex vertexData[6];
 
 	//First triangle
-	vertexData[0].setPosition(x + width, y + width);
+	vertexData[0].setPosition(x + width, y + height);
 	vertexData[0].setUV(1.0f, 1.0f);
 
 	vertexData[1].setPosition(x, y + height);
@@ -43,7 +43,7 @@ void Sprite::init(float x, float y, float width, float height) {
 	vertexData[4].setPosition(x + width, y);
 	vertexData[4].setUV(1.0f, 0.0f);
 
-	vertexData[5].setPosition(x + width, y + width);
+	vertexData[5].setPosition(x + width, y + height);
 	vertexData[5].setUV(1.0f, 1.0f);
 
 	for (unsigned int i = 0; i < 6; i++) {
@@ -70,7 +70,7 @@ void Sprite::draw() {
 	glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, colour));
 
 	// Vertex attribute pointer
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, colour));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uv));
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 

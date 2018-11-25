@@ -27,7 +27,6 @@ private:
 
 	Sprite _sprite;
 	GLSLProgram _colourProgram;
-	GLTexture _playerTexture;
 
 	float _time;
 };
